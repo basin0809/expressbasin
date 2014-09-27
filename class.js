@@ -1,6 +1,8 @@
 
 var express = require("express");
 var app = express();
+var port =  process.env.OPENSHIFT_NODEJS_PORT || 8080;   // Port 8080 if you run locally
+var address =  process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1"; // Listening to localhost if you run locally
 app.all("*", function(req, res, next){
 	res.header("Access-Control-Allow-Origin","*");
 	res.header("Access-Control-Allow-Headers","X-Request-With");
@@ -34,6 +36,5 @@ app.get("/classes/:index/section:sectionIndex", function(req,res){
 	res.json(classes[index].section[sectionIndex]);
 });
 app.set('port', process.env.PORT || 8080);
-var server = app.listen(app.get('port'), function() {
-    console.log('Listening on port %d', server.address().port);
+var server = app.listen(port, address);
 });

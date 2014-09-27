@@ -1,4 +1,5 @@
 
+var http = require("http");
 var express = require("express");
 var app = express();
 var port =  process.env.OPENSHIFT_NODEJS_PORT || 8080;   // Port 8080 if you run locally
@@ -37,8 +38,8 @@ app.get("/classes/:index/section:sectionIndex", function(req,res){
 });
 app.set('port', process.env.OPENSHIFT_NODEJS_PORT || 8080); 
 app.set('ipaddr', process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1");
-var server = app.listen(port, address);
-});
-var server = app.listen(app.get('port'), function() {
-    console.log('Listening on port %d', server.address().port);
+
+http.createServer(app).listen(app.get('port'),
+  function(){
+    console.log("Express server listening on port " + app.get('port'));
 });

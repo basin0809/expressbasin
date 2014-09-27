@@ -39,7 +39,6 @@ app.get("/classes/:index/section:sectionIndex", function(req,res){
 app.set('port', process.env.OPENSHIFT_NODEJS_PORT || 8080); 
 app.set('ipaddr', process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1");
 
-http.createServer(app).listen(app.get('port'),
-  function(){
-    console.log("Express server listening on port " + app.get('port'));
+var server = app.listen(port, address,function() {
+    console.log('Listening on port %d', server.address().port);
 });
